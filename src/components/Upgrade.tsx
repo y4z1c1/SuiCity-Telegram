@@ -7,6 +7,8 @@ import {
   useSuiClient,
 } from "@mysten/dapp-kit";
 import { MIST_PER_SUI } from "@mysten/sui/utils";
+import useWallet from "../hooks/useWallet"; // Ensure correct path to your hook
+
 
 const Upgrade = ({
   buildingType, // 0 for office, 1 for factory, 2 for house, 3 for entertainment_complex, 4 for castle
@@ -58,6 +60,8 @@ const Upgrade = ({
   const canUpgradeCastle = useMemo(() => {
     return totalOtherBuildingsLevel >= requiredTotalLevels[castleLevel];
   }, [totalOtherBuildingsLevel, castleLevel, requiredTotalLevels]);
+
+  const { wallet, signAndExecuteTransaction } = useWallet();
 
   const { mutate: signAndExecute } = useSignAndExecuteTransaction({
     execute: async ({ bytes, signature }) =>
@@ -235,8 +239,6 @@ const Upgrade = ({
       checkUserBalance(); // Throws error if balance is insufficient
 
       const transactionBlock = new Transaction();
-      transactionBlock.setSender(String(account?.address));
-      console.log("Upgrade with SITY:", costs.sity * Number(MIST_PER_SUI));
 
       // Handle SUI-based upgrades
       if (costs.sui > 0) {
@@ -254,23 +256,6 @@ const Upgrade = ({
             transactionBlock.object(ADDRESSES.CLOCK),
           ],
         });
-
-        signAndExecute(
-          { transaction: transactionBlock },
-          {
-            onSuccess: (result) => {
-              console.log("Upgrade successful with SUI", result);
-              showModal("✅ Upgrade successful!", 1); // Show success message in the modal
-              onUpgradeSuccess();
-              setIsProcessing(false); // Reset processing state after success
-            },
-            onError: (error) => {
-              console.error("Upgrade error with SUI", error);
-              setIsProcessing(false); // Reset processing state on error
-              onError();
-            },
-          }
-        );
       }
       // Handle SITY-based upgrades
       else if (costs.sity > 0) {
@@ -290,31 +275,28 @@ const Upgrade = ({
             transactionBlock.object(ADDRESSES.CLOCK),
           ],
         });
-
-        signAndExecute(
-          { transaction: transactionBlock },
-          {
-            onSuccess: () => {
-              console.log("Upgrade successful with SITY");
-              showModal("✅ Upgrade successful!", 1); // Show success message in the modal
-              onUpgradeSuccess();
-              setIsProcessing(false); // Reset processing state after success
-            },
-            onError: (error) => {
-              console.error("Upgrade error with SITY", error);
-              showModal(`🚫 Error: ${error}`, 0); // Show error message in the modal
-              setIsProcessing(false); // Reset processing state on error
-              onError();
-            },
-          }
-        );
       }
+
+      // Use signAndExecuteTransaction for executing the transaction
+      const result = await signAndExecuteTransaction(transactionBlock, {
+        showEffects: true,
+        showObjectChanges: true,
+      });
+
+      console.log("Upgrade successful:", result);
+      showModal("✅ Upgrade successful!", 1); // Show success message in the modal
+      onUpgradeSuccess(); // Trigger the success callback
     } catch (error) {
       console.error("Upgrade Error:", error);
-      setIsProcessing(false); // Reset processing state on general error
-      onError();
+      showModal(`🚫 Error: ${error}`, 0); // Show error message in the modal
+      onError(); // Trigger the error callback
+    } finally {
+      setIsProcessing(false); // Reset processing state
     }
+
   }, [
+    wallet,
+    signAndExecuteTransaction,
     nft,
     buildingType,
     currentLevel,
@@ -358,10 +340,10 @@ const Upgrade = ({
       const costs = getUpgradeCosts(currentLevel);
       try {
         setIsProcessing(true);
-        checkUserBalanceCastle(useSui);
+        checkUserBalanceCastle(useSui); // Check user's balance based on SUI or SITY usage
 
         const transactionBlock = new Transaction();
-        transactionBlock.setSender(String(account?.address));
+        transactionBlock.setSender(String(wallet.address));
 
         if (useSui) {
           // Upgrade with SUI
@@ -397,31 +379,26 @@ const Upgrade = ({
           });
         }
 
-        signAndExecute(
-          { transaction: transactionBlock },
-          {
-            onSuccess: () => {
-              showModal("✅ Upgrade successful!", 1);
-              onUpgradeSuccess();
-              setIsProcessing(false);
-              setCastleUpgradeClicked(false);
+        // Use signAndExecuteTransaction for execution
+        const result = await signAndExecuteTransaction(transactionBlock, {
+          showEffects: true,
+          showObjectChanges: true,
+        });
 
-            },
-            onError: (error) => {
-              showModal(`🚫 Error: ${error.message}`, 0);
-              setIsProcessing(false);
-              setCastleUpgradeClicked(false);
-              onError();
-            },
-          }
-        );
+        console.log("Castle upgrade successful:", result);
+        showModal("✅ Upgrade successful!", 1); // Show success message in the modal
+        onUpgradeSuccess(); // Trigger the success callback
+        setCastleUpgradeClicked(false); // Reset castle upgrade state
       } catch (error) {
         console.error("Upgrade Error:", error);
-        setIsProcessing(false);
-        onError();
+        showModal(`🚫 Error: ${(error as Error).message}`, 0); // Show error message in the modal
+        onError(); // Trigger the error callback
+      } finally {
+        setIsProcessing(false); // Reset processing state
       }
+
     },
-    [nft, buildingType, costs, account, signAndExecute, checkUserBalance, onUpgradeSuccess, onError, showModal]
+    [wallet, signAndExecuteTransaction, nft, buildingType, costs, account, signAndExecute, checkUserBalance, onUpgradeSuccess, onError, showModal]
   );
 
 
@@ -463,11 +440,12 @@ const Upgrade = ({
             </>
           ) : buildingType === 4 && castleUpgradeClicked ? (
             <>
+
               <button onClick={() => upgradeCastle(true)} disabled={isProcessing}>
-                Upgrade for {(costs.sui / Number(MIST_PER_SUI)).toFixed(2)} SUI
+                {isProcessing ? "Processing..." : `Upgrade for ${(costs.sui / Number(MIST_PER_SUI)).toFixed(2)} SUI`}
               </button>
               <button onClick={() => upgradeCastle(false)} disabled={isProcessing}>
-                Upgrade for {formatBalance(costs.sity / 1000)} SITY
+                {isProcessing ? "Processing..." : `Upgrade for ${formatBalance(costs.sity / 1000)} SITY`}
               </button>
             </>
           ) : (

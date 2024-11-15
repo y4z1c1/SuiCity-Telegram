@@ -870,7 +870,7 @@ const Game: React.FC = () => {
       setIsAwaitingBlockchain(false);
 
     }
-  }, []);
+  }, [connected]);
 
 
 

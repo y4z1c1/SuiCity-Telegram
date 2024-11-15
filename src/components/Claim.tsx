@@ -1,115 +1,110 @@
 import { useCallback, useState } from "react";
-import { ADDRESSES } from "../../addresses.ts"; // Import the addresses
+import { ADDRESSES } from "../../addresses";
 import { Transaction } from "@mysten/sui/transactions";
-import { useSignAndExecuteTransaction, useSuiClient } from "@mysten/dapp-kit";
+import useWallet from "../hooks/useWallet"; // Ensure correct path to your hook
 
-const Claim = ({
-  nft,
-  onClaimSuccess,
-  onClick,
-  onError, // Prop to handle error
-  showModal, // Add showModal as a prop
-  suiBalance, // Receive SUI balance as prop
-  walletObject
-}: {
+interface ClaimProps {
   nft: any;
   onClaimSuccess: () => void;
   onClick: () => void;
   onError: () => void;
-  showModal: (message: string, bgColor: 0 | 1 | 2) => void; // Define showModal prop type with message and bg
+  showModal: (message: string, bgColor: 0 | 1 | 2) => void;
   suiBalance: number;
   walletObject: any;
-}) => {
-  const [isLoading, setIsLoading] = useState(false); // State for loading indication
-  const suiClient = useSuiClient();
-  const { mutate: signAndExecute } = useSignAndExecuteTransaction({
-    execute: async ({ bytes, signature }) =>
-      suiClient.executeTransactionBlock({
-        transactionBlock: bytes,
-        signature,
-        options: {
-          showRawEffects: true,
-          showEffects: true,
-          showObjectChanges: true,
-        },
-      }),
-  });
+}
 
+const Claim: React.FC<ClaimProps> = ({
+  nft,
+  onClaimSuccess,
+  onClick,
+  onError,
+  showModal,
+  suiBalance,
+  walletObject,
+}) => {
+  const { wallet, signAndExecuteTransaction } = useWallet();
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Function to check if the user has enough SUI balance for gas
   const checkUserBalance = useCallback(() => {
     if (suiBalance < 0.01) {
-      showModal("❗️ You need more SUI in order to pay gas.", 0);
-      throw new Error("You need more SUI in order to pay gas.");
+      showModal("❗️ You need more SUI to pay gas.", 0);
+      throw new Error("Insufficient SUI balance for gas.");
     }
-
     return true;
   }, [suiBalance, showModal]);
 
-  // Memoized claim function to prevent unnecessary re-renders
+  // Claim function that executes the transaction
   const claim = useCallback(async () => {
+    if (!wallet.address) {
+      showModal("🚫 Please connect a wallet first.", 0);
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      setIsLoading(true); // Set loading state
-      await checkUserBalance(); // Check user balance before proceeding
+      await checkUserBalance();
 
-      const transactionBlock = new Transaction();
-
-      console.log("wallet object is: ", walletObject);
-
-      transactionBlock.moveCall({
+      const transaction = new Transaction();
+      transaction.moveCall({
         target: `${ADDRESSES.PACKAGE}::nft::claim_sity`,
         arguments: [
-          transactionBlock.objectRef({
+          transaction.objectRef({
             objectId: nft.objectId,
             digest: nft.digest,
             version: nft.version,
           }),
-          transactionBlock.object(ADDRESSES.GAME),
-          transactionBlock.object(String(walletObject)),
-
-          transactionBlock.object(ADDRESSES.CLOCK),
+          transaction.object(ADDRESSES.GAME),
+          transaction.object(String(walletObject)),
+          transaction.object(ADDRESSES.CLOCK),
         ],
       });
 
-      signAndExecute(
-        { transaction: transactionBlock },
-        {
-          onSuccess: () => {
-            console.log("Claim successful! Your tokens have been claimed.");
-            showModal("✅ Claim successful!", 1); // Show success message in the modal
+      // Sign and execute the transaction using custom wallet
+      const result = await signAndExecuteTransaction(transaction, {
+        showEffects: true,
+        showObjectChanges: true,
+      });
 
-            onClaimSuccess(); // Call onSuccess handler
-          },
-          onError: (error) => {
-            console.error("Claim error", error);
-            showModal(`🚫 Error: ${error}`, 0); // Show success message in the modal
-
-            onError(); // Call onError handler
-          },
-        }
-      );
+      console.log("Claim successful:", result);
+      showModal("✅ Claim successful!", 1);
+      onClaimSuccess(); // Trigger the success callback
     } catch (error) {
       console.error("Claim Error:", error);
-
-      onError(); // Catch and handle any outer error
+      showModal(`🚫 Error: ${error}`, 0);
+      onError(); // Trigger the error callback
     } finally {
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
     }
-  }, [nft, signAndExecute, onClaimSuccess, onError]);
-
-
+  }, [
+    wallet,
+    signAndExecuteTransaction,
+    nft,
+    checkUserBalance,
+    onClaimSuccess,
+    onError,
+    showModal,
+    walletObject,
+  ]);
 
   return (
     <div className="flex flex-col gap-6">
-      <button
-        className={`mx-auto px-5 py-3 border border-transparent text-base font-medium rounded-md text-white ${isLoading ? "bg-gray-500" : "bg-indigo-600 hover:bg-indigo-700"
-          }`}
-        disabled={isLoading} // Disable the button while processing
-        onClick={() => {
-          onClick(); // Call onClick to pause accumulation
-          claim(); // Call claim function
-        }}
-      >
-        {isLoading ? "Processing..." : "Claim"}
-      </button>
+      {wallet.address ? (
+        <>
+          <button
+            className={`mx-auto px-5 py-3 border border-transparent text-base font-medium rounded-md text-white ${isLoading ? "bg-gray-500" : "bg-indigo-600 hover:bg-indigo-700"
+              }`}
+            disabled={isLoading}
+            onClick={() => {
+              onClick(); // Call onClick to pause accumulation
+              claim(); // Call claim function
+            }}
+          >
+            {isLoading ? "Processing..." : "Claim"}
+          </button>
+        </>
+      ) : (
+        <p>Please connect your wallet to claim.</p>)}
     </div>
   );
 };

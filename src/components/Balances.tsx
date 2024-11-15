@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { SuiClient, getFullnodeUrl } from "@mysten/sui/client";
 import { MIST_PER_SUI } from "@mysten/sui/utils";
-import { useCurrentAccount } from "@mysten/dapp-kit";
 import * as HoverCard from "@radix-ui/react-hover-card";
+import useWallet from "../hooks/useWallet"; // Ensure correct path to your hook
 
 interface BalancesProps {
   sityBalance: number; // The current SITY balance
@@ -15,7 +15,7 @@ const Balances: React.FC<BalancesProps> = ({
   onBalancesUpdate,
   refreshTrigger,
 }) => {
-  const account = useCurrentAccount();
+  const { wallet } = useWallet();
   const [suiBalance, setSuiBalance] = useState<number>(0);
 
   const provider = new SuiClient({
@@ -23,15 +23,15 @@ const Balances: React.FC<BalancesProps> = ({
   });
 
   const fetchBalances = useCallback(async () => {
-    if (!account?.address) return;
+    if (!wallet.address) return;
 
     try {
       const [suiResponse] = await Promise.all([
 
-        provider.getBalance({ owner: String(account?.address) }),
+        provider.getBalance({ owner: String(wallet.address) }),
       ]);
 
-
+      console.log("suiResponse", suiResponse);
 
       const fetchedSuiBalance =
         parseInt(suiResponse.totalBalance) / Number(MIST_PER_SUI);
@@ -44,11 +44,11 @@ const Balances: React.FC<BalancesProps> = ({
     } catch (error) {
       console.error("Error fetching balances:", error);
     }
-  }, [account?.address, onBalancesUpdate]);
+  }, [wallet.address, onBalancesUpdate]);
 
   useEffect(() => {
     fetchBalances();
-  }, [account?.address, fetchBalances, refreshTrigger]);
+  }, [wallet.address, fetchBalances, refreshTrigger]);
 
 
   // Function to format the balance for readability

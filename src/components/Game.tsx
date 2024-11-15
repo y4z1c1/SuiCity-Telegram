@@ -189,14 +189,14 @@ const Game: React.FC = () => {
       setHasNftInDb(true); // Set to false in case of an error
       console.error("Error checking if user has NFT:", error);
     }
-  }, [connected]);
+  }, []);
 
 
   useEffect(() => {
     if (connected && connected) {
       checkIfUserHasNft(); // Check if the user has an NFT in the database
     }
-  }, [connected, connected, checkIfUserHasNft]);
+  }, [checkIfUserHasNft]);
 
   useEffect(() => {
     if (connected) {
@@ -204,7 +204,7 @@ const Game: React.FC = () => {
     } else {
       setIsGameActive(false); // Stop the game when the wallet is disconnected
     }
-  }, [connected]);
+  }, []);
 
 
   const mintBackgroundUrl = useMemo(
@@ -229,7 +229,7 @@ const Game: React.FC = () => {
     handleClaimSuccess(); // Trigger the claim success logic
 
 
-  }, [connected]);
+  }, []);
 
 
   // State for tracking airdrop claim data
@@ -505,7 +505,7 @@ const Game: React.FC = () => {
       console.log("Account or game data changed, fetching nonce...");
       fetchCurrentNonce(); // Only call fetchCurrentNonce when both account and gameData are available
     }
-  }, [connected, gameData, fetchCurrentNonce]);
+  }, [gameData, fetchCurrentNonce]);
 
 
 
@@ -870,7 +870,7 @@ const Game: React.FC = () => {
       setIsAwaitingBlockchain(false);
 
     }
-  }, [connected]);
+  }, []);
 
 
 
@@ -909,11 +909,11 @@ const Game: React.FC = () => {
     if (!success) {
       console.error("Failed to refresh SITY after trying all RPC URLs");
     }
-  }, [connected, walletObject]);
+  }, [walletObject]);
 
   useEffect(() => {
     refreshSity();
-  }, [connected, filteredNft]);
+  }, [filteredNft]);
 
   // Re-fetch NFTs and balances when account changes
   useEffect(() => {
@@ -926,7 +926,7 @@ const Game: React.FC = () => {
       fetchGameData();
       fetchCurrentNonce();
     }
-  }, [connected, refreshNft, fetchGameData, handleBalancesUpdate]);
+  }, [refreshNft, fetchGameData, handleBalancesUpdate]);
 
   useEffect(() => {
     refreshNft();
@@ -936,7 +936,7 @@ const Game: React.FC = () => {
     refreshSity();
 
 
-  }, [account]);
+  }, []);
 
   const handleMapButtonClick = () => {
 

@@ -39,7 +39,7 @@ const Mint: React.FC<MintProps> = ({ onMintSuccessful, showModal }) => {
       onMintSuccessful();
     } catch (error) {
       console.error("Mint Error:", error);
-      showModal("🚫 Error minting NFT", 0);
+      showModal(`🚫 ${error}`, 0);
     } finally {
       setLoading(false);
     }

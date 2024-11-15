@@ -1,0 +1,125 @@
+.HoverCardContent {
+  border-radius: 6px;
+  padding: 10px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  color: rgb(255, 255, 255);
+
+  /* Border */
+
+  /* Outer shadow for 3D effect */
+  box-shadow: 5px 5px 0px #000000,
+    /* Outer shadow */ 5px 5px 10px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(5px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* For Safari */
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  z-index: 20;
+  box-sizing: border-box;
+}
+.HoverCardContent[data-side="top"] {
+  animation-name: slideDownAndFade;
+}
+.HoverCardContent[data-side="right"] {
+  animation-name: slideLeftAndFade;
+}
+.HoverCardContent[data-side="bottom"] {
+  animation-name: slideUpAndFade;
+}
+.HoverCardContent[data-side="left"] {
+  animation-name: slideRightAndFade;
+}
+
+.HoverCardArrow {
+  fill: rgba(0, 0, 0, 1);
+}
+
+.ImageTrigger {
+  cursor: pointer;
+  border-radius: 100%;
+  display: inline-block;
+}
+.ImageTrigger:focus {
+  box-shadow: 0 0 0 2px white;
+}
+
+.Image {
+  display: block;
+  border-radius: 100%;
+}
+.Image.normal {
+  width: 30px;
+  height: 30px;
+}
+.Image.large {
+  width: 45x;
+  height: 45px;
+}
+
+.Text {
+  font-family: "Kanit";
+  margin: 0;
+  color: white;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 90%;
+}
+.Text.faded {
+  font-family: "Kanit";
+  font-weight: 300;
+  font-size: 80%;
+
+  color: rgba(255, 255, 255, 0.7);
+}
+.Text.bold {
+  font-family: "Kanit";
+  font-size: 90%;
+
+  font-weight: 500;
+}
+
+@keyframes slideUpAndFade {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  0% {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,77 @@
+/* Import Sigmar and Sigmar One from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Sigmar&family=Sigmar+One&display=swap");
+
+@font-face {
+  font-family: "Fashion Norsa";
+  src: url("/fonts/fashionnorsa.otf") format("otf"),
+    url("/fonts/fashionnorsa.ttf") format("ttf"),
+    url("/fonts/fashionnorsa.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("/fonts/Helvetica.woff") format("woff"),
+    url("/fonts/Helvetica.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Helvetica Oblique";
+  src: url("/fonts/Helvetica-Oblique.woff") format("woff"),
+    url("/fonts/Helvetica-Oblique.ttf") format("ttf");
+  font-weight: normal;
+  font-style: oblique;
+}
+
+@font-face {
+  font-family: "Helvetica Compressed";
+  src: url("/fonts/helvetica-compressed-5871d14b6903a.woff") format("woff"),
+    url("/fonts/helvetica-compressed-5871d14b6903a.otf") format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Helvetica Rounded Bold";
+  src: url("/fonts/helvetica-rounded-bold-5871d05ead8de.woff") format("woff"),
+    url("/fonts/helvetica-rounded-bold-5871d05ead8de.otf") format("otf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Helvetica Bold";
+  src: url("/fonts/Helvetica-Bold.woff") format("woff"),
+    url("/fonts/Helvetica-Bold.ttf") format("ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Helvetica Bold Oblique";
+  src: url("/fonts/Helvetica-BoldOblique.woff") format("woff"),
+    url("/fonts/Helvetica-BoldOblique.ttf") format("ttf");
+  font-weight: bold;
+  font-style: oblique;
+}
+
+@font-face {
+  font-family: "Helvetica Light";
+  src: url("/fonts/helvetica-light-587ebe5a59211.woff") format("woff"),
+    url("/fonts/helvetica-light-587ebe5a59211.ttf") format("ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Apply Fonts */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica", Helvetica, sans-serif;
+  font-weight: bold; /* Make all Helvetica text bold */
+  background-color: rgba(31, 33, 192); /* Middle dark blue */
+  color: white;
+}

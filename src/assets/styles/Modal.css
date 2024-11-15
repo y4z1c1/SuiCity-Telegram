@@ -1,0 +1,90 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Smooth fade effect */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  z-index: 801;
+}
+
+/* Background colors based on the 'bgColor' prop */
+.bg-red {
+  background-color: rgba(90, 0, 0, 0.2); /* Dark Red */
+}
+
+.bg-green {
+  background-color: rgba(0, 120, 0, 0.2); /* Dark Green */
+}
+
+.bg-black {
+  background-color: rgba(0, 0, 0, 0.2); /* Dark Black */
+}
+
+/* Modal content */
+.modal-content {
+  position: relative;
+  border-radius: 12px; /* Rounded corners */
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  color: rgb(255, 255, 255);
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(5px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* For Safari */
+  padding: 0.5% 1%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between; /* Flexbox layout to align text and button */
+  align-items: center;
+  opacity: 1;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  z-index: 1000;
+  border: none;
+  max-width: 80%;
+}
+
+/* Modal close button styling */
+.modal-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 200%; /* Larger font size for close button */
+  cursor: pointer;
+  z-index: 1001;
+  align-self: center; /* Vertically center the button */
+  margin-left: 20px; /* Spacing between text and close button */
+}
+
+.modal-close-btn:hover {
+  color: red; /* Change color on hover for better UX */
+}
+
+/* Fade-in class for modal */
+.fade-in {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Fade-out class for modal */
+.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Text styling */
+.modal-content h3 {
+  font-family: "Kanit";
+  font-weight: 300;
+  font-size: 120%; /* Ensure the text size is the same as the close button */
+  text-align: left;
+  display: inline;
+  margin: 0; /* Remove default margins for single-line appearance */
+  white-space: normal; /* Allow text wrapping */
+  word-wrap: break-word; /* Break long words to prevent overflow */
+}

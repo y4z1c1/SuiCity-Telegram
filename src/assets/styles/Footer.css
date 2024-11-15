@@ -1,0 +1,228 @@
+.footer {
+  width: 100%;
+  padding: 20px 20px 0px 20px;
+  z-index: 1000; /* Ensure it stays on top */
+  background-color: transparent; /* Optional: Ensures no visual glitches with blur */
+  transition: all 0.1s ease-in-out; /* Smooth transition */
+  box-sizing: border-box;
+  height: 6vh;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.footer-icon {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-right: 5px;
+}
+
+.footer-icon:hover {
+  color: rgba(
+    255,
+    255,
+    255
+  ); /* Change color on hover (for example, Twitter blue) */
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+/* Make the Discord link non-clickable and show a tooltip on hover */
+.discord-soon {
+  pointer-events: none; /* Disables clicking */
+  color: grey; /* Grayscale the icon */
+}
+
+.discord-soon:hover .footer-icon {
+  color: #ffffff; /* Discord blue on hover, if desired */
+}
+
+.app-content {
+  min-height: 100%; /* Ensure content takes full height, so footer stays at the bottom */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure proper spacing between header, content, and footer */
+  transition: filter 0.3s ease-in-out; /* Smooth blur/unblur transition */
+}
+
+.blurred {
+  filter: blur(8px);
+  transition: filter 0.1s ease-in-out;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.footer-links li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+}
+
+.footer-links li a:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+  unicode-bidi: isolate;
+}
+
+.footer-reserved {
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.6rem;
+  text-align: center;
+  font-family: "Kanit";
+}
+
+.footer-reserved a {
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.6rem;
+  text-align: center;
+  font-family: "Kanit";
+}
+
+.warn {
+  color: rgb(255, 255, 255);
+  font-size: 0.8rem;
+  text-align: center;
+  width: 60%;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+/* footer.css */
+
+/* General Form Styling */
+.feedback-form {
+  background-color: rgba(0, 0, 0, 0.4); /* Add some transparency */
+  backdrop-filter: blur(10px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari-specific blur effect */
+  border-radius: 8px;
+  box-shadow: 10px 20px 0px #000000a9, 5px 5px 10px rgba(0, 0, 0, 0.25); /* Slight 3D effect with a shadow */
+  backdrop-filter: blur(10px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  padding: 15px;
+  box-sizing: border-box;
+  width: 30%;
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+.feedback-form label {
+  font-family: "Kanit", sans-serif;
+  font-weight: 300;
+}
+
+.feedback-form h2 {
+  font-family: "Kanit", sans-serif;
+  font-size: 120%;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+/* Input Fields */
+.feedback-form input[type="text"],
+.feedback-form input[type="email"],
+.feedback-form textarea {
+  color: rgb(21, 21, 21);
+
+  background-color: white; /* Slightly less transparent */
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+  width: calc(100% - 22px); /* Account for padding and border */
+  margin-bottom: 10px;
+  font-family: "Kanit", sans-serif;
+  font-size: 90%;
+  transition: all 0.2s ease-in-out; /* Smooth transition */
+}
+
+.feedback-form input[type="text"]:focus,
+.feedback-form input[type="email"]:focus,
+.feedback-form textarea:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Focus effect */
+  outline: none;
+}
+
+/* Submit Button */
+.feedback-form button {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  color: rgb(29, 29, 29);
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-family: "Kanit", sans-serif;
+  font-size: 90%;
+  font-weight: 500;
+  box-shadow: 5px 5px 0px #200c00, 5px 5px 10px rgba(0, 0, 0, 0.25); /* Slight 3D effect with a shadow */
+  transition: all 0.2s ease-in-out; /* Smooth transition */
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.feedback-form button:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Slightly more opaque on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.footer-form button:active {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.7
+  ); /* Slightly more transparent on click */
+  transform: translateY(1px); /* Pressed effect on click */
+}
+
+@media (max-width: 1440px) {
+  .feedback-form {
+    width: 60%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .footer {
+    margin-top: 120vh;
+  }
+}
+@media (max-width: 1024px) {
+  .warn {
+    width: 85%;
+  }
+  .feedback-form {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .warn {
+    width: 95%;
+  }
+}

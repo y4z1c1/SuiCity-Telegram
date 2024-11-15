@@ -1,0 +1,542 @@
+.countdown,
+.war-modal h3 {
+  font-weight: 500;
+  color: white;
+  text-shadow: black 2px 2px 2px;
+}
+
+.war button {
+  background-color: rgba(255, 0, 0, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(5px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* For Safari */
+  align-self: center; /* Center the button horizontally */
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  top: 2%;
+  width: 12%;
+  border-radius: 12px;
+  border: none;
+  box-sizing: border-box;
+  padding: 0.5%;
+  font-weight: 500;
+  font-size: 100%;
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25); /* Slight 3D effect with a shadow */
+  transition: all 0.1s ease-in-out;
+  color: white;
+  text-shadow: black 1px 1px 2px; /* Add a subtle shadow */
+  z-index: 1000;
+}
+
+.war button:hover {
+  cursor: pointer;
+  top: 2.5%;
+}
+
+.war-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(255, 255, 255);
+  padding: 2%;
+  border-radius: 12px;
+  text-align: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px); /* For Safari */
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center contents vertically */
+  justify-content: center; /* Center contents horizontally */
+}
+
+.war-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  justify-content: center; /* Center the grid items */
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px;
+  max-width: 150%; /* Restrict the width for equal margins */
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.war-card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%; /* Will adapt based on grid layout */
+  max-width: 180px;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  transition: transform 0.3s;
+  cursor: pointer;
+  margin-top: 30px;
+}
+.war-card-item:hover {
+  transform: scale(1.05);
+}
+
+.enemy-image {
+  width: 80%;
+  object-fit: cover;
+  border-radius: 5%;
+  margin-bottom: 10px;
+}
+
+.city-name {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.enemy-population,
+.probability-text,
+.reward-text {
+  font-size: 0.9rem;
+  color: #eee;
+  margin: 5px 0;
+}
+
+.mode-button {
+  background-color: rgb(255, 80, 71);
+  color: rgb(255, 255, 255);
+  padding: 8px;
+  width: 90%;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.2s;
+}
+
+.mode-button:hover {
+  transform: scale(1.1);
+}
+
+.war-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: auto;
+  transition: opacity 0.7s ease-in-out;
+}
+
+.war-overlay.visible {
+  opacity: 1;
+}
+
+.war-video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.war-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.7s ease-in-out;
+  z-index: -1; /* Keeps the video in the background if needed */
+}
+.war-video-fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.result-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px); /* For Safari */
+  color: rgb(255, 255, 255);
+  padding: 2%;
+  border-radius: 12px;
+  text-align: center;
+  z-index: 1000;
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center contents vertically */
+  justify-content: center; /* Center contents horizontally */
+}
+
+.result-overlay {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px); /* For Safari */
+  box-shadow: 5px 5px 0px #000000;
+
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1005;
+  width: 80%;
+  max-width: 500px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-overlay.visible {
+  opacity: 1;
+}
+
+.result-header {
+  font-family: "Kanit";
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.result-details {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.result-details p {
+  margin: 5px 0;
+}
+
+.transaction-link {
+  margin-top: 0px;
+  font-size: 0.9rem;
+}
+.transaction-link a {
+  color: rgb(0, 123, 255);
+  text-decoration: none;
+}
+.start-war-button {
+  background-color: rgb(0, 255, 0);
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25);
+
+  color: #000000;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+  flex-grow: 4;
+}
+
+.start-war-button:hover {
+  transform: translateY(3px);
+}
+.start-war-button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.shield-button {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25);
+
+  color: #000000;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+  flex-grow: 2;
+}
+
+.shield-button.on {
+  background-color: rgb(0, 195, 255);
+}
+
+.shield-button:hover {
+  transform: translateY(3px);
+}
+
+.animation-button {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25);
+
+  color: #000000;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+  flex-grow: 2;
+}
+
+.animation-button.on {
+  background-color: rgb(255, 204, 0);
+}
+
+.animation-button:hover {
+  transform: translateY(3px);
+}
+
+.close-button {
+  background-color: rgb(255, 0, 0);
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25);
+
+  color: #ffffff;
+  padding: 5px 10px;
+  margin-left: 20px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+  flex-grow: 1;
+}
+
+.close-button:hover {
+  transform: translateY(3px);
+}
+
+.war-card-item.selected {
+  border: 2px solid rgb(255, 255, 255); /* Highlight border for selected enemy */
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5); /* Light blue glow */
+  transform: scale(1.05); /* Slightly enlarge selected card */
+}
+.probability-text {
+  font-weight: 700;
+}
+
+.twitter-share-button {
+  background-color: rgb(118, 180, 255); /* Semi-transparent background */
+  color: #000000;
+  align-self: center; /* Center the button horizontally */
+  margin-top: auto; /* Push the button to the bottom */
+  margin-bottom: 2%;
+  width: 60%;
+  border-radius: 2px;
+  border: none;
+  box-sizing: border-box;
+  padding: 0.5%;
+  font-weight: 500;
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25); /* Slight 3D effect with a shadow */
+  transition: all 0.1s ease-in-out;
+}
+
+.twitter-share-button:hover {
+  cursor: pointer;
+  transform: translate(0, 3px);
+}
+
+@keyframes goldGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.reward-golden-text {
+  font-family: "Kanit", "Helvetica";
+  font-weight: 700;
+  font-size: 120%;
+  background: linear-gradient(
+    45deg,
+    #f3ec78,
+    #ff5e3e,
+    #f3ec78
+  ); /* golden shimmer colors */
+  background-size: 300% 300%;
+  animation: goldGradient 3s ease infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.background-none {
+  background-color: transparent !important;
+  transition: all 1s ease-in-out;
+}
+
+.reward-info {
+  color: greenyellow;
+  font-weight: 500;
+}
+
+.war-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.first-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  gap: 20px;
+}
+
+.second-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.war-buttons button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1920px) {
+  h4 {
+    font-size: 90%;
+  }
+
+  .war-card-item {
+    padding: 15px;
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 1440px) {
+  h4 {
+    font-size: 80%;
+  }
+
+  .war-cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    max-width: 100%;
+  }
+
+  .enemy-image {
+    width: 60%;
+  }
+
+  .war-card-item {
+    padding: 5px;
+  }
+
+  .reward-text,
+  .probability-text {
+    font-size: 60% !important;
+  }
+
+  .war button {
+    width: 15%;
+    font-size: 70%;
+  }
+}
+
+@media (max-width: 600px) {
+  .war-cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(30%, 3fr));
+    max-width: 100%;
+    margin-top: 0px;
+    padding: 5px;
+  }
+
+  .first-row {
+    margin-top: 10px;
+  }
+
+  .war-card-item {
+    padding: 2px;
+    max-width: 120px;
+  }
+
+  .enemy-image {
+    display: none;
+  }
+
+  .probability-text {
+    font-size: 0.6rem !important;
+  }
+
+  .reward-text {
+    font-size: 0.6rem !important;
+  }
+
+  .close-button {
+    font-size: 80%;
+    padding: 2px 5px;
+  }
+
+  .start-war-button {
+    font-size: 80%;
+    padding: 2px 5px;
+  }
+  .shield-button {
+    font-size: 80%;
+
+    padding: 2px 5px;
+  }
+
+  .animation-button {
+    font-size: 80%;
+
+    padding: 2px 5px;
+  }
+
+  .war-modal h3 {
+    font-size: 100%;
+  }
+}

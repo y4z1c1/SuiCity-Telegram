@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin
+Disallow: /private
+Disallow: /login
+Disallow: /signup
+
+Allow: /
+
+Sitemap: https://suicityp2e.com/sitemap.xml

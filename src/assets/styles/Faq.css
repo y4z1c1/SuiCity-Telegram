@@ -1,0 +1,151 @@
+.faq-container {
+  background-color: rgba(31, 33, 192, 0.9);
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.faq-section {
+  width: 60%;
+  margin: 0 auto;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 8px 12px 0px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+}
+
+.faq-item h2 {
+  text-align: left;
+  color: rgb(0, 0, 0, 0.8);
+  text-shadow: 2px 4px 60px rgba(0, 0, 0, 0.3);
+  font-size: 160%;
+}
+
+.faq-item p {
+  font-size: 140%;
+  text-align: left;
+  color: rgb(0, 0, 0, 0.6);
+  text-shadow: 2px 4px 60px rgba(0, 0, 0, 0.2);
+}
+.faq-item li {
+  font-size: 140%;
+  text-align: left;
+  color: rgb(0, 0, 0, 0.6);
+  text-shadow: 2px 4px 60px rgba(0, 0, 0, 0.2);
+}
+
+.faq-item a {
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+}
+
+.faq-item ul {
+  list-style-position: inside; /* Moves the bullet inside the padding area */
+}
+
+@media (max-width: 1920px) {
+  .faq-container {
+    background-color: rgba(31, 33, 192, 0.9);
+    color: white;
+    text-align: center;
+    box-sizing: border-box;
+    margin-top: 20px;
+  }
+
+  .faq-section {
+    width: 60%;
+    margin: 0 auto;
+    background-color: white;
+    color: rgb(0, 0, 0);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 8px 12px 0px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+  }
+
+  .faq-item {
+    margin-bottom: 20px;
+  }
+
+  .faq-item h2 {
+    text-align: left;
+    color: rgb(0, 0, 0, 0.8);
+    text-shadow: 2px 4px 60px rgba(0, 0, 0, 0.3);
+    font-size: 150%;
+  }
+
+  .faq-item p {
+    font-size: 100%;
+    text-align: left;
+    color: rgb(0, 0, 0, 0.6);
+    text-shadow: 2px 4px 60px rgba(0, 0, 0, 0.2);
+  }
+  .faq-item li {
+    font-size: 100%;
+    text-align: left;
+    color: rgb(0, 0, 0, 0.6);
+    text-shadow: 2px 4px 60px rgba(0, 0, 0, 0.2);
+  }
+
+  .faq-item a {
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+  }
+
+  .faq-item ul {
+    list-style-position: inside; /* Moves the bullet inside the padding area */
+  }
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 1024px) {
+  .faq-section {
+    width: 80%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq-section {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 3px 6px 0px rgba(0, 0, 0, 0.4);
+  }
+
+  .faq-item li,
+  .faq-item p {
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-section {
+    padding: 15px;
+  }
+
+  .faq-item li,
+  .faq-item p {
+    font-size: 60%;
+  }
+
+  .faq-item h2 {
+    font-size: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .faq-section {
+    padding: 10px;
+  }
+  .faq-item li,
+  .faq-item p {
+    font-size: 50%;
+  }
+}

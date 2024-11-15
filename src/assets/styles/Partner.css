@@ -1,0 +1,164 @@
+.partner-system {
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  color: rgb(255, 255, 255);
+  margin-top: 20%;
+  /* Border */
+
+  /* Outer shadow for 3D effect */
+  box-shadow: 5px 5px 0px #000000,
+    /* Outer shadow */ 5px 5px 10px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(5px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* For Safari */
+  border-radius: 8px;
+  padding: 5%;
+  box-sizing: border-box;
+  width: 95%;
+}
+
+.partner-system h3 {
+  color: #ffffff;
+  background-color: rgb(71, 108, 255); /* Semi-transparent background */
+  cursor: pointer;
+  align-self: center; /* Center the button horizontally */
+  margin-top: auto; /* Push the button to the bottom */
+  margin-bottom: 4%;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 2px;
+  border: none;
+  box-sizing: border-box;
+  padding: 1%;
+  font-weight: 500;
+  font-size: 120%;
+  text-align: center;
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25); /* Slight 3D effect with a shadow */
+  transition: all 0.1s ease-in-out;
+}
+
+.partner-system button {
+  color: #ffffff;
+  background-color: rgb(72, 72, 160); /* Semi-transparent background */
+  cursor: pointer;
+  align-self: center; /* Center the button horizontally */
+  margin-top: auto; /* Push the button to the bottom */
+  margin-bottom: 4%;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 2px;
+  border: none;
+  box-sizing: border-box;
+  padding: 1%;
+  font-weight: 500;
+  font-size: 140%;
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25); /* Slight 3D effect with a shadow */
+  transition: all 0.1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partner-system button img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.partner-system button:disabled {
+  cursor: not-allowed;
+  background-color: gainsboro;
+  color: #000000;
+}
+
+.partner-system button:disabled:hover {
+  transform: translateY(0px);
+}
+
+.partner-system button:hover {
+  transform: translateY(3px);
+}
+
+.partner-system p {
+  color: rgb(255, 255, 255);
+  text-align: center; /* Center text within the div */
+  margin: 0;
+  margin-bottom: 12px;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.partner-system span,
+.partner-system li {
+  font-family: "Kanit", Helvetica;
+  font-weight: 100;
+  color: rgb(255, 255, 255);
+  text-align: left; /* Center text within the div */
+  margin: 0;
+
+  padding: 0;
+  width: 90%;
+  text-decoration: none;
+  list-style: none;
+  list-style-position: inside;
+}
+
+/* Spinner */
+.partner-spinner {
+  border: 3px solid rgba(0, 0, 0, 0.1); /* Light border */
+  border-left-color: #ffffff; /* Primary color for the spinner */
+  border-radius: 50%; /* Circular shape */
+  width: 10px; /* Smaller size */
+  height: 10px; /* Smaller size */
+  animation: spin 1s linear infinite; /* Infinite rotation animation */
+  margin: 5px auto; /* Center the spinner */
+}
+
+@media (max-width: 1920px) {
+  .partner-system button {
+    font-size: 120%;
+  }
+
+  .partner-system h3 {
+    font-size: 120%;
+  }
+}
+
+@media (max-width: 1620px) {
+  .partner-system button {
+    font-size: 100%;
+    padding: 0.5%;
+  }
+
+  .partner-system h3 {
+    font-size: 100%;
+  }
+
+  .partner-system p {
+    font-size: 70%;
+  }
+
+  .partner-system {
+    margin-top: 10%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .partner-system {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 425px) {
+  .partner-system button {
+    font-size: 80%;
+    padding: 0.5%;
+  }
+
+  .partner-system h3 {
+    font-size: 80%;
+  }
+}

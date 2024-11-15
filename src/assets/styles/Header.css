@@ -1,0 +1,175 @@
+/* Default styles for all browsers */
+.header {
+  text-align: center;
+  padding: 60px 0px 0px 0px;
+  display: flex; /* Use Flexbox to align elements */
+  justify-content: space-between; /* Distribute space between title and links */
+  box-sizing: border-box;
+  height: 6vh;
+}
+
+.logo-title-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  height: 160px; /* Increase the logo size */
+}
+
+.suicity-title {
+  font-size: 250%; /* Keep the SuiCity text large */
+  color: white;
+  font-family: "Fashion Norsa", sans-serif;
+  text-shadow: 2px 4px 0px rgba(0, 0, 0, 0.4); /* Default shadow */
+  margin: 0;
+}
+
+.title {
+  width: 50%;
+  height: auto;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%; /* Make the navbar full width */
+  display: flex;
+  justify-content: space-evenly; /* Align logo on the left and links on the right */
+  background-color: rgba(0, 0, 0, 0.4); /* Add some transparency */
+  backdrop-filter: blur(10px); /* Apply the blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari-specific blur effect */
+  height: 6vh;
+
+  z-index: 1000; /* Ensure it's on top of other elements */
+  padding: 10px 0; /* Add some padding for better visibility */
+  box-sizing: border-box;
+}
+
+.nav-links {
+  position: absolute;
+  right: 40%;
+  top: 50%;
+  transform: translate(100%, -50%);
+  display: flex;
+  justify-content: flex-end; /* Align navigation links to the right */
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.8rem;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-links a:hover {
+  color: rgb(255, 255, 255, 1);
+}
+
+.Text_textVariants_mono_true__2bv1ur7 {
+  font-family: "Kanit" !important;
+}
+
+.AccountDropdownMenu_connectedAccount__div2ql0 {
+  padding: 1% !important;
+  border-radius: 8px;
+}
+
+.WalletList_container__1v2s6cz0 {
+  cursor: pointer !important;
+}
+
+.Button_buttonVariants_variant_primary__x1s81q1 {
+  font-family: "Kanit" !important;
+  font-weight: 500 !important;
+  font-size: 80% !important;
+  color: rgba(27, 27, 27, 1) !important;
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25) !important; /* Slight 3D effect with a shadow */
+  padding: 1% 2% !important;
+  box-sizing: border-box !important;
+  transition: all 0.1s ease-in-out;
+}
+.Button_buttonVariants_variant_primary__x1s81q1:hover {
+  cursor: pointer !important;
+  background-color: #ffffff !important; /* Dark brown background color */
+  transform: translateY(
+    3px
+  ) !important; /* Move the button down and to the right */
+}
+
+.AccountDropdownMenu_menuContainer__div2ql1 {
+  background-color: #ffffff !important; /* Dark brown background color */
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25) !important; /* Slight 3D effect with a shadow */
+}
+
+.connectButton {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-100%, -50%);
+  display: flex;
+  justify-content: flex-end; /* Align navigation links to the right */
+  width: 20%;
+  transition: all 0.1s ease-in-out;
+}
+
+.connectButton:hover {
+  cursor: pointer;
+}
+
+.ConnectModal_content__gz8z92 {
+  background-color: #ffffff !important; /* Dark brown background color */
+  box-shadow: 5px 5px 0px #000000, 5px 5px 10px rgba(0, 0, 0, 0.25) !important; /* Slight 3D effect with a shadow */
+}
+.Button_buttonVariants_size_md__x1s81q3,
+.GettingStarted_installButtonContainer__1fp07e12,
+.AccountDropdownMenu_menuItem__div2ql3,
+.Heading__1aa835k0,
+.Text_textVariants_size_sm__2bv1ur1,
+.InfoSection_container__1wtioi70 h3,
+.WhatIsAWallet_container__1ktpkq90 h2 {
+  font-family: "Kanit" !important;
+}
+
+.AccountDropdownMenu_menuItem__div2ql3:hover,
+.WalletListItem_walletItem__1dqqtqs1:hover {
+  cursor: pointer !important;
+}
+
+@media (max-width: 768px) {
+  .suicity-title {
+    font-size: 2rem; /* Decrease the font size for smaller screens */
+    margin-top: -5px; /* Adjust the margin for smaller screens */
+  }
+
+  .logo {
+    height: 120px; /* Decrease the logo size for smaller screens */
+  }
+
+  .title {
+    width: 60%; /* Adjust the width for smaller screens */
+  }
+}
+
+@media (max-width: 375px) {
+  .suicity-title {
+    font-size: 2rem; /* Decrease the font size for smaller screens */
+  }
+
+  .logo {
+    height: 100px; /* Decrease the logo size for smaller screens */
+  }
+
+  .title {
+    width: 50%; /* Adjust the width for smaller screens */
+  }
+}

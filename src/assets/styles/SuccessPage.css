@@ -1,0 +1,29 @@
+.success-container {
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.success-container h1 {
+  font-size: 2em;
+  color: #28a745;
+}
+
+.success-container p {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.success-container .back-home {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.success-container .back-home:hover {
+  background-color: #0056b3;
+}

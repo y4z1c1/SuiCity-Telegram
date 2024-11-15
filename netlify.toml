@@ -1,0 +1,9 @@
+[functions]
+directory = "netlify/functions"  # Specify your functions directory
+
+  # Define function-specific settings as an object
+  [functions.functionName]  # Replace "functionName" with your function's name if needed
+  timeout = 30  # Extend timeout to 30 seconds (if allowed by your plan)
+
+[functions.background]
+  external_node_modules = ["mongodb"]

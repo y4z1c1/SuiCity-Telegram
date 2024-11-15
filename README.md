@@ -1,5 +1,7 @@
 # 🌆 SuiCity P2E Game 🌆
 
+TELEGRAMMM
+
 Welcome to **SuiCity** – a play-to-earn game on the Sui blockchain! Build, earn, and conquer in a city that’s uniquely yours. Whether you’re upgrading buildings, earning tokens, or engaging in intense battles, SuiCity brings city-building and blockchain gaming together!
 
 🌐 **[Visit SuiCity](https://suicityp2e.com)** 🌐
@@ -31,4 +33,5 @@ We welcome contributions! Feel free to open issues, suggest features, and submit
 ---
 
 🎉 Let’s build, earn, and grow together in SuiCity!
+
 # SuiCity-Telegram

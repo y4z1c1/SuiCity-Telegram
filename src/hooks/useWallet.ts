@@ -71,8 +71,6 @@ const useWallet = () => {
       transaction.setSenderIfNotSet(
         wallet.keypair.getPublicKey().toSuiAddress()
       );
-      // Get transaction bytes to be signed
-      const transactionBytes = await transaction.build({ client });
 
       // Execute the signed transaction on the blockchain
       const result = await client.signAndExecuteTransaction({

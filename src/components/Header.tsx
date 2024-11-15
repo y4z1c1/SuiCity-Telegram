@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../assets/styles/Header.css";
 import { Link, useLocation } from "react-router-dom";
-import { ConnectButton } from "@mysten/dapp-kit";
 
 const Header: React.FC = () => {
   const [isSafari, setIsSafari] = useState(false);

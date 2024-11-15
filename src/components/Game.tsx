@@ -6,13 +6,11 @@ import Building from "./Building"; // Import the Building component
 import { ADDRESSES } from "../../addresses";
 import { BURN } from "../../burn";
 import { SuiClient, getFullnodeUrl } from "@mysten/sui/client";
-import { useCurrentWallet, useCurrentAccount } from "@mysten/dapp-kit";
 import Modal from "./Modal"; // Import the new Modal component
 import NftSpecs from "./NftSpecs";
 import Population from "./Population";
 import NftTech from "./NftTech";
 import Reference from "./Reference";
-import WalletChecker from "./WalletChecker";
 import Leaderboard from "./Leaderboard";
 import Burn from "./Burn";
 import ClaimReward from "./ClaimReward";
@@ -21,6 +19,7 @@ import "../assets/styles/HoverCard.css";
 import SingleplayerWar from "./SingleplayerWar";
 import Partner from "./Partner";
 import Wallet from "./Wallet";
+import Mint from "./Mint";
 
 
 
@@ -38,7 +37,7 @@ const Game: React.FC = () => {
     }
   }, [connected]);
 
-  const account = useCurrentAccount();
+  const account = { address: connected };
   const [filteredNft, setFilteredNft] = useState<any>(null); // Storing only a single filtered NFT
   const [domains, setDomains] = useState<any[]>([]);
 
@@ -91,16 +90,6 @@ const Game: React.FC = () => {
 
   const [oldNft, setOldNft] = useState<any>(null); // Storing only a single filtered NFT
   const [isChangeNameActive, setIsChangeNameActive] = useState(false); // New state to track the "Change Name" section
-
-  const handleMessageGenerated = (message: string | null) => {
-    console.log("Message generated:", message);
-    setStoredMessage(message);
-  }
-
-  const handleSignatureGenerated = (signature: string | null) => {
-    console.log("Signature generated:", signature);
-    setStoredSignature(signature);
-  }
 
   const handleShowChangeName = () => {
     setIsChangeNameActive(!isChangeNameActive);
@@ -1099,7 +1088,7 @@ const Game: React.FC = () => {
           <h2>🏆 Leaderboard</h2>
 
 
-          {account && <Leaderboard population={totalPopulation} />}
+          {connected && <Leaderboard population={totalPopulation} />}
         </div>
       </div>
 
@@ -1142,7 +1131,11 @@ const Game: React.FC = () => {
         {/* Mint Section - Only show if not minted and connected */}
         {connected && !filteredNft && !isLoading && (
           <div className="mint">
-            <WalletChecker showModal={showModal} onMintSuccess={handleMintSuccess} onMessageGenerated={handleMessageGenerated} onSignatureGenerated={handleSignatureGenerated} />
+            <div className="wallet-checker">
+
+              <Mint showModal={showModal} onMintSuccessful={handleMintSuccess} />
+            </div>
+
           </div>
         )}
 

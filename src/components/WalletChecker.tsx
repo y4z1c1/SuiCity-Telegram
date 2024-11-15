@@ -1,53 +1,31 @@
 import { useEffect, useState } from "react";
 import Mint from "./Mint";
 import { useSignPersonalMessage, useCurrentAccount } from "@mysten/dapp-kit";
-import AirdropCalculator from "./AirdropCalculator";
 
 
 const WalletChecker = ({
     showModal,
     onMintSuccess,
-    onMessageGenerated,
-    onSignatureGenerated,
 
 }: {
     showModal: (message: string, bgColor: 0 | 1 | 2) => void;
     onMintSuccess: () => void;
-    onMessageGenerated: (message: string | null) => void;
-    onSignatureGenerated: (signature: string | null) => void;
 }) => {
     const [screenName, setScreenName] = useState<string | null>(null); // Track Twitter screen name
     const [accessToken, setAccessToken] = useState<string | null>(null); // Track access token for Twitter
     const [boundWallet, setBoundWallet] = useState<string | null>(null); // Track the bound wallet address
     const [checkedBoundStatus, setCheckedBoundStatus] = useState<boolean>(false); // Track if the bound check has been made
-    const [bindingChecked, setBindingChecked] = useState<boolean>(false); // Track if the bind check has been completed
+    const [, setBindingChecked] = useState<boolean>(false); // Track if the bind check has been completed
     const currentAccount = useCurrentAccount(); // Get the current wallet address
     const tweetId = "1838160920129782259"; // Example tweet ID to check
     const { mutate: signPersonalMessage } = useSignPersonalMessage(); // Hook to sign message
-    const [loadingVerification, setLoadingVerification] = useState<boolean>(false); // Track verification loading state
-    const [totalAirdrop, setTotalAirdrop] = useState<number | null>(null); // Track total airdrop value
+    const [, setLoadingVerification] = useState<boolean>(false); // Track verification loading state
     const [, setIsFollowed] = useState<boolean>(false); // Track if follow task is clicked
     const [, setIsLiked] = useState<boolean>(false); // Track if like task is clicked
     const [, setIsRetweeted] = useState<boolean>(false); // Track if retweet task is clicked
-    const [isQuoted, setIsQuoted] = useState<boolean>(false); // Track if quote task is clicked
-    const [isVerified, setIsVerified] = useState<boolean>(false); // Track if tasks are verified
-    const [tasksEnabled, setTasksEnabled] = useState<boolean>(true); // State to track if task buttons are enabled
-    const [isAirdropCalculated, setIsAirdropCalculated] = useState<boolean>(false); // New state
-
-
-
-    const handleAirdropCalculated = (totalAirdrop: number) => {
-        setTotalAirdrop(totalAirdrop);
-        setIsAirdropCalculated(true); // Set to true when airdrop calculation is done
-    };
-
-    const handleMessageGenerated = (message: string | null) => {
-        onMessageGenerated(message);
-    };
-
-    const handleSignatureGenerated = (signature: string | null) => {
-        onSignatureGenerated(signature);
-    }
+    const [isQuoted,] = useState<boolean>(false); // Track if quote task is clicked
+    const [, setIsVerified] = useState<boolean>(false); // Track if tasks are verified
+    const [, setTasksEnabled] = useState<boolean>(true); // State to track if task buttons are enabled
 
 
 
@@ -134,73 +112,7 @@ const WalletChecker = ({
             return false;
         }
     };
-    // Twitter login redirect function
-    const handleTwitterLogin = () => {
-        window.location.href = "/.netlify/functions/login"; // Redirect to Twitter login
-    };
 
-    // Function to handle the verification process
-    const handleVerifyTasks = async () => {
-        const randomChance = Math.random();
-        const apiRandomChance = Math.random();
-
-        if (isQuoted) {
-            setLoadingVerification(true);
-
-            // 20% chance to call the Twitter API for either like, retweet, or follow
-            if (randomChance <= 0.02) {
-
-                // Decide randomly which action to verify via API
-                if (apiRandomChance <= 0.33) {
-                    const checkLiked = await checkIfLikedTweetAPI();
-                    if (!checkLiked) {
-                        showModal("🚫 Verification failed. Please like the tweet.", 0); // Show failure modals
-                        setTasksEnabled(true); // Enable tasks after verification
-                        setLoadingVerification(false);
-                        return;
-                    }
-                } else if (apiRandomChance <= 0.66) {
-                    const checkRetweeted = await checkIfRetweetedTweetAPI();
-                    if (!checkRetweeted) {
-                        showModal("🚫 Verification failed. Please retweet the tweet.", 0); // Show failure modal
-                        setTasksEnabled(true); // Enable tasks after verification
-
-                        setLoadingVerification(false);
-                        return;
-                    }
-                } else {
-                    const checkFollowed = await checkIfFollowedAPI();
-                    if (!checkFollowed) {
-                        showModal("🚫 Verification failed. Please follow @SuiCityP2E.", 0); // Show failure modal
-                        setTasksEnabled(true); // Enable tasks after verification
-
-                        setLoadingVerification(false);
-                        return;
-                    }
-                }
-            }
-
-            else if (randomChance <= 0.05) {
-                showModal("🚫 Verification failed. Please complete all tasks.", 0); // Show failure modal
-                setTasksEnabled(true); // Enable tasks after verification
-
-                setLoadingVerification(false);
-                return;
-            }
-
-            // Simulate API verification delay
-            setTimeout(() => {
-                setIsVerified(true);
-                setTasksEnabled(true); // Enable tasks after verification
-
-                setLoadingVerification(false);
-            }, 3000); // Simulate 4 seconds delay for verification
-        } else {
-            showModal("❗️ Please complete all tasks before verifying.", 0); // Show error modal if tasks are not completed
-            setTasksEnabled(true); // Enable tasks after verification
-
-        }
-    };
 
 
 
@@ -362,9 +274,6 @@ const WalletChecker = ({
                 <Mint showModal={showModal} onMintSuccessful={onMintSuccess} />
 
             </>
-
-
-
 
 
         </div>
